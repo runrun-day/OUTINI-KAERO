@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+body {
+	margin: 0 auto;
+	margin-top: 0;
+    background-color: #f6fbfc;
+    color: #222222;
+    font-family: sans-serif;
+}
+
+#container {
+	/*	モバイルサイズ*/
+    width: 740px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+/*	ヘッダー */
+header {
+	height: 112px;
+    background-color: #aad9ff;;
+	margin: 0;  
+	display: flex;
+	/*	高さ中央*/
+	align-items: center;
+}
+/*	ヘッダー 文字 */
+.title {
+	padding-left: 20px;
+	font-size: 2.5rem;
+	height: auto;
+	margin: 0;
+	font-family: "Rubik Bubbles", system-ui;
+	font-weight: 400;
+	font-style: normal;
+}
