@@ -2,9 +2,11 @@
 <!--ヘッダーアイコンなし-->
   <body>
     <div th:fragment="userHomeHeader">
-      <header class="headerLeft">
+      <header>
         <a class="title">OUTINI KAERO</a>
-        <img src="@{/img/backHome.png}" alt="ホームアイコン" height="30">
+		<a href="#" class="icon">
+        	<img th:src="@{/img/backHome.png}" alt="ホームアイコン" height="80">
+		</a>
       </header>
     </div>
   </body>

@@ -10,14 +10,14 @@ body {
 
 #container {
 	/*	モバイルサイズ*/
-    width: 740px;
+    max-width: 768px;
     margin: 0 auto;
     background-color: #fff;
 }
 
 /*	ヘッダー */
 header {
-	height: 112px;
+	height: 100px;
     background-color: #aad9ff;;
 	margin: 0;  
 	display: flex;
@@ -26,11 +26,20 @@ header {
 }
 /*	ヘッダー 文字 */
 .title {
-	padding-left: 20px;
-	font-size: 2.5rem;
+	padding-left: 10px;
+	font-size: 2rem;
 	height: auto;
 	margin: 0;
 	font-family: "Rubik Bubbles", system-ui;
 	font-weight: 400;
 	font-style: normal;
+}
+/*ヘッダーアイコン*/
+.icon {
+	margin-left: auto;
+	padding-right: 20px;
+}
+/*メイン表示*/
+main{
+	height:1480px;
 }
