@@ -21,34 +21,30 @@
 <!--		エラーメッセージ-->
 		<p th:if="${errorMsg}" th:text="${errorMsg}" class="error-msg"></p>
 	
-		<form th:action="@{/user/user-home}" th:object="${userForm}" method="POST" class="form">
+		<form th:action="@{/user/user-home}" th:object="${userSignUpForm}" method="POST" class="form">
+			<p class="form_value">ユーザー名</p>
+	    	<input type="text" name="userName" class="input_form" ><br>
+	    	<div th:if="${#fields.hasErrors('userName')}" th:errors="*{mail}" class="error-msg"></div>
+			<br>
 			<p class="form_value">メールアドレス</p>
 	    	<input type="mail" name="mail" class="input_form" ><br>
-	    	<div th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}" class="error-msg"></div>
+	    	<div th:if="${#fields.hasErrors('mail')}" th:errors="*{password}" class="error-msg"></div>
 			<br>
-			<p class="form_value">パスワード</p>
+			<p class="form_value">パスワード<a class="small"> 4文字以上8文字以内</a></p>
 	    	<input type="password" name="password" class="input_form" ><br>
 	    	<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-msg"></div>
 			<br>
-	    	<input type="submit" value="ログイン" class="blue_btn">
+			<p class="form_value">パスワード(確認用)</p>
+	    	<input type="password" name="password2" class="input_form" ><br>
+	    	<div th:if="${#fields.hasErrors('password2')}" th:errors="*{password}" class="error-msg"></div>
 			<br>
+			<div class="btn-two reverse">
+	    			<input type="submit" value="登録" class="blue_btn">
 			</form>
-
-		<div class="link">
-			会員登録がお済みでない方は<br>
-			こちらから →
-				<form th:action="@{/user/user-signup}" method="POST" class="link">
-					<input type="submit" value="新規登録" class="non_btn">
-				</form>
-		</div>
-		<br>
-		<br>
-
-			<div class="right_btn">
-			    <form th:action="@{/admin/admin-login}" method="POST">
-		    		<input type="submit" value="管理者" class="other_btn">
-		 	  	</form>
+	
+		    <form th:action="@{/user/user-login}" method="POST">
+	    		<input type="submit" value="戻る" class="wilte_btn">
+	 	  	</form>
 			</div>
 		</main>
 	</div>
-</html>

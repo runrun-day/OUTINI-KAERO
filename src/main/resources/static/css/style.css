@@ -11,7 +11,6 @@ body {
 #container {
 	/*	モバイルサイズ*/
     max-width: 768px;
-    margin: 0 auto;
     background-color: #fff;
 }
 
@@ -41,5 +40,115 @@ header {
 }
 /*メイン表示*/
 main{
-	height:1480px;
+/*	height:1480px;*/
+padding-bottom: 100px;
+	text-align: center;
 }
+
+/*エラー*/
+.error-msg{
+	color:red;
+}
+
+/*フォームデザイン*/
+.form{
+	padding:50px 0;
+}
+
+.form_value{
+	margin-bottom: 0;
+ 
+	padding-left: 15%;
+	text-align: start;
+}
+/*管理者ボタン右寄せ*/
+.right_btn{
+	text-align: right;
+	padding-right: 5%;
+}
+
+.input_form{
+	width: 70%; 
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: 2px solid #89a3b8;
+	box-sizing: border-box;
+}
+
+.small{
+	font-size:small ;
+}
+
+/* ボタンデザイン */
+.blue_btn{
+	margin: 0 30px;
+	font-weight: bold;
+	height:40px;
+	padding:5px 15px;
+	color:#fff;
+	background-color: rgb(49, 102, 206);
+	border-radius: 5px;
+	border-color: #aad9ff;
+	font-size: 1.2rem;
+}
+
+.blue_btn:hover{
+	color:#fff;
+	background-color: rgb(109, 145, 216);
+}
+
+.wilte_btn{
+	margin: 0 30px;
+	font-weight: bold;
+	height:40px;
+	padding:5px 15px;
+	color:#24437a;
+	background-color: #aad9ff;
+	border-radius: 5px;
+	border-color: rgb(80, 111, 172);
+	font-size: 1.2rem;
+}
+
+.wilte_btn:hover{
+	color:#24437a;
+	background-color: #318dd8;
+}
+
+.other_btn{
+	margin: 0 30px;
+	font-weight: bold;
+	height:40px;
+	padding:5px 15px;
+	color:#ffffff;
+	background-color: #94b2e5;
+	border-radius: 5px;
+	border-color: rgb(80, 111, 172);
+	font-size: 1.2rem;
+}
+.other_btn:hover{
+	color:#ffffff;
+	background-color: #6c93d7;
+}
+
+.non_btn{
+	background: none;        /* 背景なし */
+	border: none;            /* 枠線なし */
+	color: rgb(80, 111, 172);        
+	padding: 0;              
+	margin: 0 10px;          
+	text-decoration: underline; /* 下線 */
+	font-size: 1.1em;
+}
+
+.link{
+	display: inline;
+}
+
+.btn-two.reverse{
+	display: flex;		
+	flex-direction:row-reverse;
+	justify-content: center;
+	align-items:center;
+
+}
+
