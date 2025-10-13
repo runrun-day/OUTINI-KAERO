@@ -14,33 +14,44 @@ public class SecurityConfig {
 
 //	securityFilterの設定
 	 @Bean
-	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-	        http
-	            .authorizeHttpRequests(authz -> authz
-	                .requestMatchers(
-	                    "/user/user-login",
-	                    "/user/user-signup",
-	                    "/user/user-signup-confirm",
-	                    "/user/user-signup-complete",
-	                    "/user/user-logout-complete",
-	                    "/admin/admin-login",
-	                    "/css/**", "/js/**", "/images/**"
-	                ).permitAll()
-	                .anyRequest().authenticated()
-	            )
-	            .formLogin(form -> form
-	                .loginPage("/user/user-login")
-	                .loginProcessingUrl("/user/login")
-	                .defaultSuccessUrl("/home", true)
-	                .failureUrl("/user/user-login?error=true")
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers(
+                    "/user/user-login",
+                    "/user/user-signup",
+                    "/user/user-signup-confirm",
+                    "/user/user-signup-complete",
+                    "/user/user-logout-complete",
+                    "/admin/admin-login",
+                    "/css/**", "/js/**", "/images/**"
+                ).permitAll()
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/user/user-login")
+                .loginProcessingUrl("/user/login")
+                .defaultSuccessUrl("/user/user-home", true)
+                .failureUrl("/user/user-login?error=true")
+                // name属性="mail" 
+                .usernameParameter("mail")
+                // name属性="password"
+                .passwordParameter("password") 
+                .permitAll()
+            )
+        
+	        .logout(logout -> logout
+	                .logoutUrl("/user/logout")
+	                .logoutSuccessUrl("/user/user-login?logout")
 	                .permitAll()
 	            );
-	        return http.build();
-		}
+        return http.build();
+	}
 
 //	 ハッシュ化用
 	 @Bean 
-	    public PasswordEncoder passwordEncoder() {
-	        return new BCryptPasswordEncoder();
-	    }
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+ 
 }

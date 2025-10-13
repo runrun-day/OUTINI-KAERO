@@ -10,4 +10,6 @@ public interface UserRepository {
 	boolean userSignUpAdd(UserAccount user);
 	
 	boolean userMailSearch(String mail);
+	
+	UserAccount userAccountSearch(String mail, String Password);
 }

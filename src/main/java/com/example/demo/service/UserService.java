@@ -13,4 +13,8 @@ public interface UserService {
 	//メールアドレスの重複確認
 	boolean userMailSearch(String mail);
 	
+//	ユーザーログイン
+	UserAccount userAccountSearch(String mail, String Password);
+	
+	
 }
