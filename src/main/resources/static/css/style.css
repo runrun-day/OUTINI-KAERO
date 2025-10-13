@@ -41,7 +41,7 @@ header {
 /*メイン表示*/
 main{
 /*	height:1480px;*/
-padding-bottom: 100px;
+	padding-bottom: 100px;
 	text-align: center;
 }
 
@@ -97,21 +97,21 @@ padding-bottom: 100px;
 	background-color: rgb(109, 145, 216);
 }
 
-.wilte_btn{
+.white_btn{
 	margin: 0 30px;
 	font-weight: bold;
 	height:40px;
 	padding:5px 15px;
 	color:#24437a;
-	background-color: #aad9ff;
+	background-color: #e6f4ff;
 	border-radius: 5px;
 	border-color: rgb(80, 111, 172);
 	font-size: 1.2rem;
 }
 
-.wilte_btn:hover{
+.white_btn:hover{
 	color:#24437a;
-	background-color: #318dd8;
+	background-color: #aecfe9;
 }
 
 .other_btn{
@@ -145,6 +145,7 @@ padding-bottom: 100px;
 }
 
 .btn-two.reverse{
+	padding-top: 15px;
 	display: flex;		
 	flex-direction:row-reverse;
 	justify-content: center;
@@ -152,3 +153,24 @@ padding-bottom: 100px;
 
 }
 
+.btn-two{
+	display: flex;		
+	justify-content: center;
+	align-items:center;
+
+}
+
+.table{
+	table-layout: auto;
+	width: 95%;
+	margin: 20px auto;
+}
+
+.non_form{
+	border: none;
+	background: transparent;
+	text-align: center;
+	outline: none;
+	pointer-events: none;
+	font-size: 1rem;
+}
