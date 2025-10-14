@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUTINI KAERO</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+<!--	フォント-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="container">
+	<!--ヘッダーアイコンなし-->
+	<div th:replace="~{fragments/userHeader :: userHeader}"></div>
+	<main>
+		
+		<h2>ログアウト</h2>
+		<p>ログアウトしました。</p>
+
+		<div>
+		    <form th:action="@{/user/user-login}" method="POST">
+	    		<input type="submit" value="ログインページ" class="blue_btn">
+	 	  	</form>
+		</div>
+		
+	</main>
+	</div>
+</body>
+</html>

@@ -30,21 +30,22 @@ public class UserSignUpController {
 			BindingResult result,
 			Model model) {
 		
-		if (result.hasErrors()) {
-//			pass1とpass2の確認
-			if (!form.getPassword().equals(form.getPassword2())) {
-				 result.rejectValue("password2", "error.password2", "パスワードが一致しません");
-			}
-//			メールアドレスの登録チェック
-			if (!service.userMailSearch(form.getMail())) {
-			        model.addAttribute("errorMsg", "入力のメールアドレスは既に使用されています。");
-			    return "user/user-signup";
-			}
-			return "user/user-signup";// バリデーション エラーの場合
+//		メールアドレスの登録チェック
+		if (service.userMailSearch(form.getMail())) {
+			result.rejectValue("mail", "error.mail", "入力のメールアドレスは既に使用されています");
+//	        model.addAttribute("errorMsg", "入力のメールアドレスは既に使用されています。");
+	        return "user/user-signup";
 		}
-		
+//		pass1とpass2の確認
+		if (!form.getPassword().equals(form.getPassword2())) {
+			 result.rejectValue("password2", "error.password2", "パスワードが一致しません");
+			 return "user/user-signup";
+		}
+//		バリデーション エラーの場合
+		 if (result.hasErrors()) {
+			 return "user/user-signup";
+		 } 
 		model.addAttribute("userSignUpForm", form);
-			
 		return "user/user-signup-confirm";
 	}
 	
@@ -62,8 +63,7 @@ public class UserSignUpController {
 		UserAccount user = new UserAccount();
 		user.setUserName(form.getUserName());
 		user.setMail(form.getMail());
-//		パスワードハッシュ化
-		user.setPassword(passwordEncoder.encode(form.getPassword()));
+		user.setPassword(form.getPassword());
 		
 //		データベースへ登録
 		boolean result2 =  service.userSignUpAdd(user);

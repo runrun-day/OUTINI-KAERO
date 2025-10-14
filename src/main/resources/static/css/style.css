@@ -83,7 +83,7 @@ main{
 .blue_btn{
 	margin: 0 30px;
 	font-weight: bold;
-	height:40px;
+	height:50px;
 	padding:5px 15px;
 	color:#fff;
 	background-color: rgb(49, 102, 206);
@@ -100,7 +100,7 @@ main{
 .white_btn{
 	margin: 0 30px;
 	font-weight: bold;
-	height:40px;
+	height:50px;
 	padding:5px 15px;
 	color:#24437a;
 	background-color: #e6f4ff;
@@ -114,10 +114,28 @@ main{
 	background-color: #aecfe9;
 }
 
+.white_btn_2{
+	margin: 10px 30px;
+	font-weight: bold;
+	height:60px;
+	width:80%;
+	padding:5px 15px;
+	color:#24437a;
+	background-color: #e6f4ff;
+	border-radius: 5px;
+	border-color: rgb(80, 111, 172);
+	font-size: 1.2rem;
+}
+
+.white_btn_2:hover{
+	color:#24437a;
+	background-color: #aecfe9;
+}
+
 .other_btn{
 	margin: 0 30px;
 	font-weight: bold;
-	height:40px;
+	height:50px;
 	padding:5px 15px;
 	color:#ffffff;
 	background-color: #94b2e5;
@@ -173,4 +191,10 @@ main{
 	outline: none;
 	pointer-events: none;
 	font-size: 1rem;
+}
+
+.frame{
+	padding: 10px;
+  	border: 1px solid #91d1e2;
+	border-radius: 5px;
 }

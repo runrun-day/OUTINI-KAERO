@@ -8,13 +8,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.example.demo.security.CustomAuthenticationSuccessHandler;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
 //	securityFilterの設定
 	 @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http,
+    		CustomAuthenticationSuccessHandler successHandler) throws Exception {
         http
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers(
@@ -31,7 +34,11 @@ public class SecurityConfig {
             .formLogin(form -> form
                 .loginPage("/user/user-login")
                 .loginProcessingUrl("/user/login")
-                .defaultSuccessUrl("/user/user-home", true)
+//                ログイン処理後のカスタム挙動
+                .successHandler(successHandler) 
+//                成功すれば /user/user-home
+//                .defaultSuccessUrl("/user/user-home", true)
+//                失敗すれば /user/user-login?error=true にリダイレクト
                 .failureUrl("/user/user-login?error=true")
                 // name属性="mail" 
                 .usernameParameter("mail")
@@ -42,7 +49,8 @@ public class SecurityConfig {
         
 	        .logout(logout -> logout
 	                .logoutUrl("/user/logout")
-	                .logoutSuccessUrl("/user/user-login?logout")
+//	                ログアウト完了のページ
+	                .logoutSuccessUrl("/user/user-logout-complete")
 	                .permitAll()
 	            );
         return http.build();

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUTINI KAERO</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+<!--	フォント-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="container">
+	<!--ヘッダーアイコンあり-->
+	<div th:replace="fragments/userHomeHeader :: userHomeHeader"></div>
+	<main>
+		<h2 th:text="${cat.catTitle}">迷子猫タイトル</h2>
+
+		<p><strong>説明:</strong> <span th:text="${cat.catExplanation}">説明</span></p>
+		<p><strong>日付:</strong> <span th:text="${#temporals.format(cat.catDate, 'yyyy-MM-dd HH:mm')}">日時</span></p>
+
+		<!-- 画像がある場合 -->
+		<div th:if="${cat.catRenamePicture}">
+		    <img th:src="@{'/images/' + ${cat.catRenamePicture}}" alt="迷子猫の写真">
+		</div>
+
+		<!-- 戻るボタン -->
+		<a th:href="@{/user/user-home}">← 一覧に戻る</a>
+
+	</main>
+	</div>
+</html>

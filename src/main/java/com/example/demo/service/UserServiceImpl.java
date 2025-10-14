@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,25 +20,21 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public boolean userSignUpAdd(UserAccount user) {	
-		return repository.userSignUpAdd(user);
-	}
-
+		 try {
+	            // パスワードをハッシュ化して保存
+	            user.setPassword(passwordEncoder.encode(user.getPassword()));
+	            user.setLoginDate(LocalDateTime.now()); // Java側でセット
+	            repository.save(user); // INSERT
+	            return true;
+	        } catch (Exception e) {
+	            System.err.println("Insert failed: " + e.getMessage());
+	            return false;
+	        }
+	    }
+	
 	@Override
 	public boolean userMailSearch(String mail) {
-		return repository.userMailSearch(mail);
+		return repository.existsByMail(mail);
 	}
-
-	@Override
-	public UserAccount userAccountSearch(String mail, String Password) {
-		
-		 UserAccount u = repository.userAccountSearch(mail,passwordEncoder.encode(Password));
-		 
-		 if (u == null) {
-	            return null; // 失敗
-	        }
-            return u; // 認証成功
-
-	}
-
 
 }

@@ -12,13 +12,56 @@
 </head>
 <body>
 	<div id="container">
-	<!--ヘッダーアイコンなし-->
-	<div th:replace="fragments/userHeader :: userHeader"></div>
 	<!--ヘッダーアイコンあり-->
-<!--	<div th:replace="fragments/userHomeHeader :: userHomeHeader"></div>-->
+	<div th:replace="fragments/userHomeHeader :: userHomeHeader"></div>
 	<main>
-とりあえずOK！
+	<br>
+	<div class="frame">
+		<p>近隣の迷子猫情報</p>
+		<div th:if="${#lists.isEmpty(cats)}">
+		    <p>現在周辺での迷子猫情報はありません。</p>
+		</div>
 
+		<div th:if="${!#lists.isEmpty(cats)}">
+		    <ul>
+				<li th:each="cat : ${cats}">
+			        <a th:href="@{'/user/missing-cat-detail/' + ${cat.catId}}"
+			           th:text="${cat.catTitle}">迷子猫タイトル</a>
+			    </li>
+		    </ul>
+		</div>
+	</div>
+	<br>
+
+	<div class="">
+	    <form th:action="@{/dummy}" method="POST">
+			<input type="submit" value="メッセージ管理" class="white_btn_2">
+	  	</form>
+	</div>
+	
+	<div class="">
+	    <form th:action="@{/dummy}" method="POST">
+			<input type="submit" value="迷子猫情報の登録・変更" class="white_btn_2">
+	  	</form>
+	</div>
+
+	<div class="">
+	    <form th:action="@{/dummy}" method="POST">
+			<input type="submit" value="ユーザー登録情報の変更" class="white_btn_2">
+	  	</form>
+	</div>
+	
+	<div class="">
+	    <form th:action="@{/dummy}" method="POST">
+			<input type="submit" value="問い合わせ" class="white_btn_2">
+	  	</form>
+	</div>
+	
+	<div class="">
+		    <form th:action="@{/user/logout}" method="POST">
+				<input type="submit" value="ログアウト" class="white_btn_2">
+		  	</form>
+		</div>
 	</main>
 	</div>
 </html>

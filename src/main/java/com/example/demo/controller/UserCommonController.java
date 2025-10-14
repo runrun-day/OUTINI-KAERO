@@ -1,35 +1,44 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.entity.UserAccount;
 import com.example.demo.form.UserLoginFrom;
 import com.example.demo.form.UserSignUpFrom;
-import com.example.demo.service.UserService;
+import com.example.demo.repository.LostCatRepository;
+import com.example.demo.service.UserLocationService;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 public class UserCommonController {
+
+//   http://localhost:8080/user/user-login
 	
-	private final UserService service;
-	
-//   http://localhost:8080/user/login
+	private final UserLocationService userLocationService;
+    private final LostCatRepository lostCatRepository;
 	
 //	ユーザーログインへ
 	@GetMapping("/user/user-login")
-	public String userLogin(Model model) {
-		 model.addAttribute("UserLoginFrom", new UserLoginFrom());
+	public String userLogin(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout,
+			Model model) {
+		
+		if (error != null) {
+	        model.addAttribute("errorMsg", "メールアドレスまたはパスワードが違います。");
+	    }
+
+	    if (logout != null) {
+	        model.addAttribute("msg", "ログアウトしました。");
+	    }
+		
+		 model.addAttribute("userLoginFrom", new UserLoginFrom());
 		return "user/user-login";
 	}
 	
@@ -40,7 +49,7 @@ public class UserCommonController {
 	    return "user/user-signup"; 
 	}
 	
-//	ユーザー登録へ
+//	ユーザー登録へ 戻る処理用
 	@PostMapping("/user/user-signup")
 	public String userSignUp(@ModelAttribute UserSignUpFrom form,
 			Model model) {
@@ -48,29 +57,17 @@ public class UserCommonController {
 	    return "user/user-signup"; 
 	}
 	
-//	ユーザーホームへ
-//	ログインできない事象あり
-	@PostMapping("/user/user-home")
-	public String userHome(@ModelAttribute UserLoginFrom form,
-			Model model) {
-		String mail = form.getMail();
-		String pass =form.getPassword();
-		UserAccount account = service.userAccountSearch(mail,pass);
-		
-		if (account == null) {
-            model.addAttribute("errorMsg", "メールアドレスまたはパスワードが違います。");
-            return "user/user-login";
-        }
-		 // Spring Security に認証情報を登録
-        UsernamePasswordAuthenticationToken authToken =
-                new UsernamePasswordAuthenticationToken(
-                		account.getMail(), null,
-                        List.of(new SimpleGrantedAuthority("ROLE_USER"))
-                );
-
-        SecurityContextHolder.getContext().setAuthentication(authToken);
-		
-		return "user/user-home";
+	@GetMapping("/user/user-home")
+	public String userHome(Model model, Authentication authentication) {
+	    String mail = authentication.getName();
+	    model.addAttribute("mail", mail);
+	    return "user/user-home";
+	}
+	
+//	ログアウト
+	@GetMapping("/user/user-logout-complete")
+	public String logoutComplete() {
+	    return "user/user-logout-complete"; 
 	}
 }
 

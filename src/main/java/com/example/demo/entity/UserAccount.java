@@ -1,9 +1,13 @@
 package com.example.demo.entity;
 
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,11 +16,19 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "user") // DBテーブル名が user の場合
 public class UserAccount {
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
+	private Integer id;
+	@Column(name = "user_name")
 	private String userName;
 	private String mail;
 	private String password;
+	@Column(name = "login_date")
+	private LocalDateTime loginDate;
+	@Column(name = "user_delete_flag")
+	private boolean  userDeleteFlag;
 }

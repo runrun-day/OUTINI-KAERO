@@ -20,24 +20,29 @@
 	<main>
 <!--		エラーメッセージ-->
 		<p th:if="${errorMsg}" th:text="${errorMsg}" class="error-msg"></p>
-	
-		<form th:action="@{/user/user-home}" th:object="${UserLoginFrom}" method="POST" class="form">
+		<p th:if="${msg}" th:text="${msg}" class="info-msg"></p>
+		
+		<form th:action="@{/user/login}" method="POST" th:object="${userLoginFrom}" class="form">
 			
 			<p class="form_value">メールアドレス</p>
-		    	<input type="mail" name="mail" class="input_form" ><br>
+		    	<input type="email" th:field="*{mail}" class="input_form" required><br>
 		    	<div th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}" class="error-msg"></div>
 			<br>
 			
 			<p class="form_value">パスワード</p>
-		    	<input type="password" name="password" class="input_form" ><br>
+		    	<input type="password" th:field="*{password}" class="input_form" required><br>
 		    	<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-msg"></div>
 			<br>
 			
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-		    	<input type="submit" value="ログイン" class="blue_btn">
+			
+			<input type="hidden" name="lat" id="lat">
+		    <input type="hidden" name="lon" id="lon">
+			
+			<input type="submit" value="ログイン" class="blue_btn">
 			<br>
 			
-			</form>
+		</form>
 
 		<div class="link">
 			会員登録がお済みでない方は<br>
@@ -56,5 +61,12 @@
 			</div>
 		</main>
 	</div>
+	
+	<script>
+	navigator.geolocation.getCurrentPosition(function(pos) {
+	    document.getElementById("lat").value = pos.coords.latitude;
+	    document.getElementById("lon").value = pos.coords.longitude;
+	});
+	</script>
 </body>
 </html>
