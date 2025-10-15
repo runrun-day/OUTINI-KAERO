@@ -6,4 +6,5 @@ import com.example.demo.entity.UserLocation;
 
 public interface UserLocationRepository extends JpaRepository<UserLocation, Integer> {
 
+//	insert処理用！！
 }

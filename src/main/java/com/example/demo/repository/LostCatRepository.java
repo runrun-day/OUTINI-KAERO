@@ -11,14 +11,15 @@ import com.example.demo.entity.LostCat;
 
 @Repository
 public interface LostCatRepository extends JpaRepository<LostCat, Integer> {
-//	半径10km内
 
 //	緯度：lat
 //	経度：lon
 //	4326：WGS84（世界測地系）のSRID（座標系ID）
 //	 ST_GeomFromText(CONCAT('POINT(', :lon, ' ', :lat, ')'), 4326)→検索位置
+//	<= 10000 半径10km以内
 //	lc.location→lost_catテーブルのlocation座標
 //	AND lc.cat_delete_flag = false→削除フラグfalseの猫だけ
+//	ORDER BY lc.cat_date DESC → 新しい日付順に並べる
 	
 	@Query(value = """
 		    SELECT * FROM lost_cat lc
@@ -27,6 +28,7 @@ public interface LostCatRepository extends JpaRepository<LostCat, Integer> {
 		        ST_GeomFromText(CONCAT('POINT(', :lon, ' ', :lat, ')'), 4326)
 		    ) <= 10000
 		    AND lc.cat_delete_flag = false
+		    ORDER BY lc.cat_date DESC
 		    """, nativeQuery = true)
-		List<LostCat> findNearbyCats(@Param("lat") double lat, @Param("lon") double lon);
+		List<LostCat> findNearbyCats(@Param("lon") double lon, @Param("lat") double lat);
 }

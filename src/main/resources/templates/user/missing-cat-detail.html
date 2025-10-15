@@ -15,19 +15,37 @@
 	<!--ヘッダーアイコンあり-->
 	<div th:replace="fragments/userHomeHeader :: userHomeHeader"></div>
 	<main>
-		<h2 th:text="${cat.catTitle}">迷子猫タイトル</h2>
-
-		<p><strong>説明:</strong> <span th:text="${cat.catExplanation}">説明</span></p>
-		<p><strong>日付:</strong> <span th:text="${#temporals.format(cat.catDate, 'yyyy-MM-dd HH:mm')}">日時</span></p>
-
-		<!-- 画像がある場合 -->
-		<div th:if="${cat.catRenamePicture}">
-		    <img th:src="@{'/images/' + ${cat.catRenamePicture}}" alt="迷子猫の写真">
+		<h2>近隣の迷子猫情報詳細</h2>
+		<div class="attention">
+			<p>知っていることがあれば登録ユーザーへ情報提供をお願いいたします。
+				なお、登録ユーザーからの返信機能等はありませんのでご了承ください。</p>
 		</div>
-
+		<div class="detail">
+		登録日: <a th:text="${#temporals.format(cat.catDate, 'yyyy-MM-dd')}">日付</a><br>
+		登録ユーザーID: <a th:text="${cat.user.userId}">ユーザーID</a><br>
+		</div>
+		<div class="border"></div>
+		<div class="detail">
+			タイトル<br>
+			<a th:text="${cat.catTitle}">迷子猫タイトル</a><br>
+			<br>
+			<!-- 画像がある場合 -->
+			<div th:if="${cat.catRenamePicture}">
+				<img th:src="@{'/images/' + ${cat.catRenamePicture}}" alt="迷子猫の写真">
+			</div>
+			<br>
+			詳細説明<br>
+			<a><span th:text="${cat.catExplanation}">説明</span></a><br>
+		</div>
 		<!-- 戻るボタン -->
-		<a th:href="@{/user/user-home}">← 一覧に戻る</a>
-
+		<div class="btn-two">
+		<form th:action="@{/user/user-home}" method="GET">
+			<input type="submit" value="戻る" class="white_btn">
+	  	</form>
+		<form th:action="@{'/user/user-message-create/' + ${cat.catId}}" method="GET">
+			<input type="submit" value="情報提供" class="blue_btn">
+	  	</form>
+		</div>	
 	</main>
 	</div>
 </html>

@@ -14,14 +14,19 @@ import jakarta.persistence.Table;
 
 import org.locationtech.jts.geom.Point;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "lost_cat")
+@Getter
+@Setter
 public class LostCat {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cat_id")
-    private Integer id;
+    private Integer catId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

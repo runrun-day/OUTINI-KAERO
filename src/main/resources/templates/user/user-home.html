@@ -23,7 +23,7 @@
 		</div>
 
 		<div th:if="${!#lists.isEmpty(cats)}">
-		    <ul>
+		    <ul class="left_list">
 				<li th:each="cat : ${cats}">
 			        <a th:href="@{'/user/missing-cat-detail/' + ${cat.catId}}"
 			           th:text="${cat.catTitle}">迷子猫タイトル</a>
@@ -56,12 +56,12 @@
 			<input type="submit" value="問い合わせ" class="white_btn_2">
 	  	</form>
 	</div>
-	
+	<br>
 	<div class="">
-		    <form th:action="@{/user/logout}" method="POST">
-				<input type="submit" value="ログアウト" class="white_btn_2">
-		  	</form>
-		</div>
+	    <form th:action="@{/user/logout}" method="POST">
+			<input type="submit" value="ログアウト" class="blue_btn">
+	  	</form>
+	</div>
 	</main>
 	</div>
 </html>

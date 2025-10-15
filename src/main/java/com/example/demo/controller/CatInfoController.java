@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.entity.LostCat;
+import com.example.demo.form.MessageFrom;
 import com.example.demo.repository.LostCatRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -24,5 +26,33 @@ public class CatInfoController {
 
 	        model.addAttribute("cat", cat);
 	        return "user/missing-cat-detail";
+	    }
+	    
+	 // 情報提供フォーム
+	    @GetMapping("/user/user-message-create/{id}")
+	    public String messageCreate(@PathVariable("id") Integer catId, Model model) {
+	        LostCat cat = lostCatRepository.findById(catId)
+	                .orElseThrow(() -> new IllegalArgumentException("指定された迷子猫情報が見つかりません: " + catId));
+
+	        model.addAttribute("cat", cat);
+	        model.addAttribute("messageFrom", new MessageFrom());
+	        return "user/user-message-create";
+	    }
+	    
+//	    ここから
+	 // 情報提供内容確認
+	    @GetMapping("/user/user-message-confirm/{id}")
+	    public String messageCreate(@PathVariable("id") Integer catId, Model model,Authentication authentication) {
+	        LostCat cat = lostCatRepository.findById(catId)
+	                .orElseThrow(() -> new IllegalArgumentException("指定された迷子猫情報が見つかりません: " + catId));
+
+	        String mail = authentication.getName();
+//	        ユーザー情報
+	        model.addAttribute("mail", mail);
+//	        外語猫情報
+	        model.addAttribute("cat", cat);
+	        
+	        model.addAttribute("messageFrom", new MessageFrom());
+	        return "user/user-message-confirm";
 	    }
 }

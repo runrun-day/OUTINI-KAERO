@@ -14,16 +14,19 @@
 	
 	<div id="container">
 	<!--ヘッダーアイコンなし-->
-	<div th:replace="fragments/userHeader :: userHeader"></div>
+	<div th:replace="~{fragments/userHeader :: userHeader}"></div>
 	<main>
-		<h2>登録完了</h2>
-		<p>再度ログインをお願いします。</p>
 
-		<form th:action="@{/user/user-login}" method="GET">
+		<h2 th:text="${title}">完了</h2>
+		<p th:text="${msg}"></p>
+
+		<form th:action="@{/user/user-login}" method="POST">
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-		    	<input type="submit" value="ログインページ" class="blue_btn">
+		    	<input type="submit" value="ホームに戻る" class="blue_btn">
 	   	</form>
+		
 	</main>
 	</div>
+
 </body>
 </html>

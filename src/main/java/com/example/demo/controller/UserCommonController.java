@@ -1,5 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,21 +12,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.entity.LostCat;
 import com.example.demo.form.UserLoginFrom;
 import com.example.demo.form.UserSignUpFrom;
-import com.example.demo.repository.LostCatRepository;
-import com.example.demo.service.UserLocationService;
-
-import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
 public class UserCommonController {
 
 //   http://localhost:8080/user/user-login
 	
-	private final UserLocationService userLocationService;
-    private final LostCatRepository lostCatRepository;
 	
 //	ユーザーログインへ
 	@GetMapping("/user/user-login")
@@ -58,8 +56,13 @@ public class UserCommonController {
 	}
 	
 	@GetMapping("/user/user-home")
-	public String userHome(Model model, Authentication authentication) {
+	public String userHome(HttpSession session, Model model, Authentication authentication) {
 	    String mail = authentication.getName();
+	    
+//	    カスタム挙動Handlerで保存したセッション呼び出し
+	    List<LostCat> cats = (List<LostCat>) session.getAttribute("cats");
+	    model.addAttribute("cats", cats); 
+	    
 	    model.addAttribute("mail", mail);
 	    return "user/user-home";
 	}

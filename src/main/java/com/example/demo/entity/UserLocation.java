@@ -14,19 +14,23 @@ import org.locationtech.jts.geom.Point;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "user_location")
+@Getter
+@Setter
 public class UserLocation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_location_id")
-    private Integer id;
+    private Integer locationId;
 
     // UserAccount（外部キー：user_id）
     @ManyToOne(fetch = FetchType.LAZY)

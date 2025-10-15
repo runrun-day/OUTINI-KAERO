@@ -11,19 +11,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
 </head>
 <body>
-	
 	<div id="container">
-	<!--ヘッダーアイコンなし-->
-	<div th:replace="fragments/userHeader :: userHeader"></div>
-	<main>
-		<h2>登録完了</h2>
-		<p>再度ログインをお願いします。</p>
-
-		<form th:action="@{/user/user-login}" method="GET">
-			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-		    	<input type="submit" value="ログインページ" class="blue_btn">
-	   	</form>
-	</main>
+		<!--ヘッダーアイコンなし-->
+		<div th:replace="~{fragments/adminHeader :: adminHeader}"></div>
+		<main>
+			
+			<h2>ログアウト</h2>
+			<p>ログアウトしました。</p>
+	
+			<div>
+			    <form th:action="@{/admin/admin-login}" method="GET">
+		    		<input type="submit" value="ログインページ" class="blue_btn">
+		 	  	</form>
+			</div>
+			
+		</main>
 	</div>
 </body>
 </html>

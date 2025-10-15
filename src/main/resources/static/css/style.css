@@ -12,6 +12,8 @@ body {
 	/*	モバイルサイズ*/
     max-width: 768px;
     background-color: #fff;
+	/*	中央寄せ*/
+	margin: 0 auto
 }
 
 /*	ヘッダー */
@@ -52,7 +54,7 @@ main{
 
 /*フォームデザイン*/
 .form{
-	padding:50px 0;
+	padding:10% 0;
 }
 
 .form_value{
@@ -73,6 +75,15 @@ main{
 	border-radius: 5px;
 	border: 2px solid #89a3b8;
 	box-sizing: border-box;
+}
+/*テキストエリア用*/
+.input_form_2{
+	width: 80%; 
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: 2px solid #89a3b8;
+	box-sizing: border-box;
+	}
 }
 
 .small{
@@ -194,7 +205,36 @@ main{
 }
 
 .frame{
-	padding: 10px;
-  	border: 1px solid #91d1e2;
+	margin: 0 15px;
+	padding: 5 10px;
+  	border: 2px solid #91d1e2;
 	border-radius: 5px;
+}
+
+.left_list{
+	text-align:left
+}
+
+.attention{
+	text-align:left;
+	margin: 0 10px;
+	padding: 10px 10px;
+  	border: 1px solid #db0404;
+	border-radius: 5px;
+	font-size:0.8rem;
+	
+}
+
+.border{
+	height: 10px;
+	margin: auto;
+	width: 80%;
+	border-bottom: 1px solid #222222;
+}
+
+.detail{
+	width: 80%;
+	margin: 10px 10px;
+	text-align:left;
+	padding: 10px 15%;
 }
