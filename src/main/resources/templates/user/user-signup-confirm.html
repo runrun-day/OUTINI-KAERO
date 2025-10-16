@@ -38,9 +38,9 @@
 		<form th:action="@{/user/user-signup-complete}" method="POST" th:object="${userSignUpForm}">
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 			<input type="hidden" th:field="*{userName}">
-		    	<input type="hidden" th:field="*{mail}">
+			<input type="hidden" th:field="*{mail}">
 			<input type="hidden" th:field="*{password}">
-		    	<input type="submit" value="登録実行" class="blue_btn">
+			<input type="submit" value="登録実行" class="blue_btn">
 	   	</form>
 
 	    <form th:action="@{/user/user-signup}" method="POST" th:object="${userSignUpForm}">

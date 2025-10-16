@@ -238,3 +238,15 @@ main{
 	text-align:left;
 	padding: 10px 15%;
 }
+
+.non {
+	list-style:none
+}
+
+.non>li{
+	text-align:left;
+}
+
+.center{
+	margin:auto;
+}

@@ -11,21 +11,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
 </head>
 <body>
-	
 	<div id="container">
 	<!--ヘッダーアイコンあり-->
 	<div th:replace="fragments/userHomeHeader :: userHomeHeader"></div>
 	<main>
-
-		<h2 th:text="${title}">完了</h2>
-		<p th:text="${msg}"></p>
-
-		<form th:action="@{/user/user-home}" method="GET">
-		    	<input type="submit" value="ホームに戻る" class="blue_btn">
-	   	</form>
+		<h3>	受信メッセージの削除確認</h3>
+		<div class="detail">
+			<p>該当メッセージを削除します。問題ない場合には確定ボタンを押してください。</p>
+		</div>
+		<div class="btn-two reverse">
+		<form th:action="@{/user/message-delete-submit}" method="POST" th:object="${message}">	
+			<input type="hidden"th:field="*{messageId}"/>
+			<input type="submit" value="確定" class="blue_btn">
+	  	</form>
 		
+		<!-- 戻るボタン -->
+		<div class="btn-two">
+		<form th:action="@{'/message-detail/' + ${message.messageId}}" method="GET">
+			<input type="submit" value="戻る" class="white_btn">
+	  	</form>
+		</div>
+		</div>	
 	</main>
 	</div>
-
-</body>
 </html>

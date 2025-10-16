@@ -23,18 +23,24 @@
 			<p>※不適切な内容と判断された場合にはアカウント利用停止となります。</p>
 		</div>
 		<div class="detail">
-		<form th:action="@{/dummy}" method="POST" th:object="${messageFrom}" class="form">
+		<form th:action="@{/user/user-message-confirm}" method="POST"
+		 th:object="${messageFrom}" class="form">
+		 	<input type="hidden" th:field="*{catId}" />
+			
 			タイトル<br>
 			<input type="text" th:field="*{title}" class="input_form_2"><br>
+			<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-msg"></div>
 			<br>
+			
 			<a class="small">見かけた際の画像などがある場合には</a><br>
 			<input type="file" th:field="*{pic}"><br>
 			<br>
+			
 			内容<br>
 			<textarea th:field="*{explanation}" class="input_form_2" rows="5"></textarea>
+			<div th:if="${#fields.hasErrors('explanation')}" th:errors="*{explanation}" class="error-msg"></div>
 		</div>
 		<div class="btn-two reverse">
-			<input type="hidden" th:field="*{cat.catId}">
 			<input type="submit" value="確認" class="blue_btn">
 	  	</form>
 		<!-- 戻るボタン -->

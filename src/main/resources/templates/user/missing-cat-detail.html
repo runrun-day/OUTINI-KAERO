@@ -30,7 +30,7 @@
 			<a th:text="${cat.catTitle}">迷子猫タイトル</a><br>
 			<br>
 			<!-- 画像がある場合 -->
-			<div th:if="${cat.catRenamePicture}">
+			<div th:if="${cat.catRenamePicture != null and !#strings.isEmpty(cat.catRenamePicture)}">
 				<img th:src="@{'/images/' + ${cat.catRenamePicture}}" alt="迷子猫の写真">
 			</div>
 			<br>

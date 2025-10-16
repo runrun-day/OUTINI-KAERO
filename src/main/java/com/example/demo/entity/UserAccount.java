@@ -35,4 +35,5 @@ public class UserAccount {
 	private LocalDateTime loginDate;
 	@Column(name = "user_delete_flag")
 	private boolean  userDeleteFlag;
+	
 }

@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,13 +24,14 @@ public class Message {
     @Column(name = "message_id")
     private Integer messageId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cat_id", nullable = false)
     private LostCat lostCat;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "message_user_id", nullable = false)
-    private UserAccount user;
+    //メッセージ送信ユーザーの外部キー
+    @ManyToOne
+    @JoinColumn(name = "message_user_id")  
+    private UserAccount fromUser;
 
     @Column(name = "m_title")
     private String title;

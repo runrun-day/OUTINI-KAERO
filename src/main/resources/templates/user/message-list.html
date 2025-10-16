@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUTINI KAERO</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+<!--	フォント-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="container">
+	<!--ヘッダーアイコンあり-->
+	<div th:replace="fragments/userHomeHeader :: userHomeHeader"></div>
+	<main>
+		<h3>受信メッセージ一覧</h3>
+		
+		<div class="center">
+		 <table  class="center">
+			<tbody>
+			<!--を繰り返し-->
+			<tr th:each="msg : ${messageList}">
+				<td>
+					<ul class="non">
+						<li th:text="${#temporals.format(msg.messageDate, 'yyyy-MM-dd HH:mm')}">日時</li>
+						<li th:text="${msg.title}">タイトル></li>
+						
+					</ul>
+				</td>
+				<td>
+					<a th:href="@{/user/message-detail/{id}(id=${msg.messageId})}" class="blue_btn">詳細</a>
+				</td>
+			</tr>
+			<!-- 空やNULLなら -->
+			<tr th:if="${messageList == null or #lists.isEmpty(messageList)}">
+				<td colspan="3">メッセージはありません</td>
+			</tr>
+			</tbody>
+		</table>
+		</div>
+		
+		<br>
+		
+		<form th:action="@{/user/user-home}" method="GET">
+			<input type="submit" value="もどる" class="white_btn">
+	   	</form>
+	</main>
+	</div>
+</html>

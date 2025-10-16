@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -30,5 +31,7 @@ public interface LostCatRepository extends JpaRepository<LostCat, Integer> {
 		    AND lc.cat_delete_flag = false
 		    ORDER BY lc.cat_date DESC
 		    """, nativeQuery = true)
-		List<LostCat> findNearbyCats(@Param("lon") double lon, @Param("lat") double lat);
+	List<LostCat> findNearbyCats(@Param("lon") double lon, @Param("lat") double lat);
+	
+	Optional<LostCat> findById(Integer catId);
 }

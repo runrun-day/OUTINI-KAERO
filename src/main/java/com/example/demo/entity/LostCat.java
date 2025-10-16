@@ -1,15 +1,16 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import org.locationtech.jts.geom.Point;
@@ -28,7 +29,7 @@ public class LostCat {
     @Column(name = "cat_id")
     private Integer catId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserAccount user;
 
@@ -49,4 +50,9 @@ public class LostCat {
 
     @Column(name = "cat_delete_flag")
     private boolean catDeleteFlag;
+    
+//    mappedBy:相手側のフィールド名→Messageエンティティのフィールド名
+    @OneToMany(mappedBy = "lostCat")
+    private List<Message> messages;
+    
 }

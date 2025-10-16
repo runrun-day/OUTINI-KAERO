@@ -15,17 +15,36 @@
 	<!--ヘッダーアイコンあり-->
 	<div th:replace="fragments/userHomeHeader :: userHomeHeader"></div>
 	<main>
-
-		
-		<form th:action="@{/dummy}" method="POST">	
+		<h3>	下記の情報提供内容で登録ユーザーへ送信しますか？</h3>
+		<div class="detail">
+			タイトル<br>
+			<a th:text="${messageFrom.title}">タイトル</a><br>
+			<br>
+			
+			<!-- 画像がある場合 -->
+			<div th:if="${messageFrom.pic != null and !#strings.isEmpty(messageFrom.pic)}">
+			    <img th:src="@{'/images/' + ${messageFrom.pic}}" alt="迷子猫の写真">
+			</div>
+			<br>
+			
+			メッセージ内容<br>
+			<a><span th:text="${messageFrom.explanation}">内容</span></a><br>
+			</table>
+		</div>
+		<div class="btn-two reverse">
+		<form th:action="@{/user/user-message-submit}" method="POST" th:object="${messageFrom}">	
+			<input type="hidden" th:field="*{catId}" />
+		    <input type="hidden" th:field="*{title}" />
+		    <input type="hidden" th:field="*{explanation}" />
+		    <input type="hidden" th:field="*{pic}" />
 			<input type="submit" value="送信" class="blue_btn">
 	  	</form>
 		<!-- 戻るボタン -->
 		<div class="btn-two">
-		<form th:action="@{/user/user-home}" method="GET">
+		<form th:action="@{'/user/missing-cat-detail/' + ${cat.catId}}" method="GET">
 			<input type="submit" value="戻る" class="white_btn">
 	  	</form>
-		
+		</div>
 		</div>	
 	</main>
 	</div>
