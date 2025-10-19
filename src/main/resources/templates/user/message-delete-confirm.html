@@ -20,14 +20,15 @@
 			<p>該当メッセージを削除します。問題ない場合には確定ボタンを押してください。</p>
 		</div>
 		<div class="btn-two reverse">
-		<form th:action="@{/user/message-delete-submit}" method="POST" th:object="${message}">	
-			<input type="hidden"th:field="*{messageId}"/>
+			
+		<form th:action="@{/user/message-delete-submit}" method="POST">
+			<input type="hidden" name="id" th:value="${message.messageId}" />	
 			<input type="submit" value="確定" class="blue_btn">
 	  	</form>
 		
 		<!-- 戻るボタン -->
 		<div class="btn-two">
-		<form th:action="@{'/message-detail/' + ${message.messageId}}" method="GET">
+		<form th:action="@{/user/message-detail/{id}(id=${message.messageId})}" method="GET">
 			<input type="submit" value="戻る" class="white_btn">
 	  	</form>
 		</div>

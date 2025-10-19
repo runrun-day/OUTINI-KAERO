@@ -24,6 +24,7 @@ import lombok.Setter;
 @Setter
 public class UserAccount {
 	@Id
+//  GenerationType.IDENTITY：DB側で自動採番
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Integer userId;

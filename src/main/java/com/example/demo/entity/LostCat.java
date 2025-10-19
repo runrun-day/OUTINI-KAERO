@@ -25,11 +25,16 @@ import lombok.Setter;
 public class LostCat {
 
 	@Id
+//  GenerationType.IDENTITY：DB側で自動採番
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cat_id")
     private Integer catId;
-
+	
+//	ManyToOne:多対1の関係
     @ManyToOne
+//  外部キーの関連エンティティをどのDBカラムで結びつけるか指定する
+//  name：外部キーのカラム名 を明示的に指定
+//  nullable = false：外部キーは必ず値が入っていなければならない（NOT NULL制約）
     @JoinColumn(name = "user_id", nullable = false)
     private UserAccount user;
 
@@ -51,7 +56,7 @@ public class LostCat {
     @Column(name = "cat_delete_flag")
     private boolean catDeleteFlag;
     
-//    mappedBy:相手側のフィールド名→Messageエンティティのフィールド名
+//  mappedBy:相手側のフィールド名→Messageエンティティのフィールド名
     @OneToMany(mappedBy = "lostCat")
     private List<Message> messages;
     

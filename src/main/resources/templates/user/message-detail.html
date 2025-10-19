@@ -41,8 +41,9 @@
 			<form th:action="@{/user/message-list}" method="GET">
 				<input type="submit" value="戻る" class="white_btn">
 		  	</form>
-			<form th:action="@{/user/message-delete-confirm/{id}(id=${message.messageId})}" method="POST">
+			<form th:action="@{/user/message-delete-confirm}" method="POST">
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input type="hidden" name="id" th:value="${message.messageId}" />
 				<input type="submit" value="削除" class="blue_btn">
 		  	</form>
 		</div>

@@ -21,11 +21,16 @@ import lombok.Setter;
 @Setter
 public class Inquiry {
     @Id
+//  GenerationType.IDENTITY：DB側で自動採番
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "inquiry_id")
     private Integer inquiryId;
-
+//	ManyToOne:多対1の関係
+//  FetchType.LAZY (遅延ロード:外部キー情報は必要に応じてタイプ)
     @ManyToOne(fetch = FetchType.LAZY)
+//  外部キーの関連エンティティをどのDBカラムで結びつけるか指定する
+//  name：外部キーのカラム名 を明示的に指定
+//  nullable = false：外部キーは必ず値が入っていなければならない（NOT NULL制約）
     @JoinColumn(name = "user_id", nullable = false)
     private UserAccount user;
 

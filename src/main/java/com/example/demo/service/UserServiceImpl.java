@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,4 +38,18 @@ public class UserServiceImpl implements UserService {
 		return repository.existsByMail(mail);
 	}
 
+	@Override
+	public UserAccount findUserByMail(String mail) {
+		Optional<UserAccount> optUser = repository.findByMail(mail);
+
+		UserAccount user;
+		if (optUser.isPresent()) {
+		    user = optUser.get();
+		    
+		    return user;
+		} else {
+		    throw new IllegalArgumentException("ユーザーが見つかりません: " + mail);
+	}
+
+	}
 }

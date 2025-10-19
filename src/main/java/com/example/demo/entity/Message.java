@@ -20,16 +20,24 @@ import lombok.Setter;
 @Setter
 public class Message {
     @Id
+//  GenerationType.IDENTITY：DB側で自動採番
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "message_id")
     private Integer messageId;
 
+//	ManyToOne:多対1の関係
+//  FetchType.LAZY (遅延ロード:外部キー情報は必要に応じてタイプ)
     @ManyToOne
+//  外部キーの関連エンティティをどのDBカラムで結びつけるか指定する
+//  name：外部キーのカラム名 を明示的に指定
+//  nullable = false：外部キーは必ず値が入っていなければならない（NOT NULL制約）
     @JoinColumn(name = "cat_id", nullable = false)
     private LostCat lostCat;
 
     //メッセージ送信ユーザーの外部キー
     @ManyToOne
+//  外部キーの関連エンティティをどのDBカラムで結びつけるか指定する
+//  name：外部キーのカラム名 を明示的に指定
     @JoinColumn(name = "message_user_id")  
     private UserAccount fromUser;
 
