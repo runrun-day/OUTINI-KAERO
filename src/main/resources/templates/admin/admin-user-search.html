@@ -15,12 +15,39 @@
 		<!--ヘッダーアイコンあり-->
 		<div th:replace="~{fragments/adminHomeHeader :: adminHomeHeader}"></div>
 		<main>
-			<form th:action="@{/dummy}" method="POST" th:object="${userId}">
+			<!--エラーメッセージ-->
+			<p th:if="${errorMsg}" th:text="${errorMsg}" class="error-msg"></p>
+			<br>
+			<form th:action="@{/admin/admin-user-search}" method="POST" th:object="${userSearchForm}">
 				ID検索<br>
-			   	<input type="text" th:field="*{userId}">
-			   	<input type="submit" value="検索" class="blue_btn">
+				<div class="btn-two">
+					<input type="text" th:field="*{userId}" class="input_form2">
+				   	<input type="submit" value="検索" class="blue_btn2">
+				</div>
 			</form>
-			
+			<br>
+			<table  class="center">
+				<tbody>
+				<!-- 空やNULLなら -->
+				<tr th:if="${userList == null or #lists.isEmpty(userList)}">
+					<td colspan="3"></td>
+				</tr>
+				<!--繰り返し-->
+				<tr th:each="u : ${userList}" class="row">
+					<td th:text="${u.userName}">ユーザー名</td>
+					<td>
+						<a th:href="@{/admin/user-detail(userId=${u.userId})}" class="blue_btn">詳細</a>
+					</td>
+				</tr>
+				<!--ID検索-->
+				<tr th:if="${user}">
+					<td th:text="${user.userName}">ユーザー名</td>
+				</tr>
+				</tbody>
+			</table>
+			<form th:action="@{/admin/admin-home}" method="GET">
+				<input type="submit" value="戻る" class="white_btn_2">
+			</form>	
 		</main>
 	</div>
 </body>

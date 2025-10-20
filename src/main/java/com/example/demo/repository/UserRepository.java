@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -27,5 +28,10 @@ public interface UserRepository extends JpaRepository<UserAccount, Long>{
 //	存在チェック用
 //   該当データが存在→true
     boolean existsByMail(String mail);
+    
+ // userDeleteFlag = falseのユーザーをloginDate降順(新しい順)で取得
+    List<UserAccount> findByUserDeleteFlagFalseOrderByLoginDateDesc();
+    
+    Optional<UserAccount> findByUserId(Integer userId);
 
 }

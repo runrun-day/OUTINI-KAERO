@@ -76,6 +76,16 @@ main{
 	border: 2px solid #89a3b8;
 	box-sizing: border-box;
 }
+
+.input_form2{
+	width: 70%; 
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: 2px solid #89a3b8;
+	box-sizing: border-box;
+	margin:auto;
+}
+
 /*テキストエリア用*/
 .input_form_2{
 	width: 80%; 
@@ -103,6 +113,23 @@ main{
 }
 
 .blue_btn:hover{
+	color:#fff;
+	background-color: rgb(109, 145, 216);
+}
+
+.blue_btn2{
+	margin: auto;
+	font-weight: bold;
+	height:50px;
+	padding:5px 15px;
+	color:#fff;
+	background-color: rgb(49, 102, 206);
+	border-radius: 5px;
+	border-color: #aad9ff;
+	font-size: 1.2rem;
+}
+
+.blue_btn2:hover{
 	color:#fff;
 	background-color: rgb(109, 145, 216);
 }
@@ -248,4 +275,8 @@ main{
 
 .center{
 	margin:auto;
+}
+
+.row{
+	margin-bottom: 10px;
 }
