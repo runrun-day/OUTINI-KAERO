@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUTINI KAERO</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+<!--	フォント-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="container">
+		<!--ヘッダーアイコンあり-->
+		<div th:replace="~{fragments/adminHomeHeader :: adminHomeHeader}"></div>
+		<main>
+		<h3>送信メッセージ一覧</h3>
+		<div th:if="${messages == null or #lists.isEmpty(messages)}"></div>
+		<div th:each="msg : ${messages}">
+			<td th:text="${#temporals.format(msg.messageDate, 'yyyy-MM-dd HH:mm')}">日時</td>
+			<div class="detail">
+				タイトル<br>
+				<a th:text="${message.title}">タイトル</a><br>
+				<br>
+				<!-- 画像がある場合 -->
+				<div th:if="${message.renamePicture != null and !#strings.isEmpty(message.renamePicture)}">
+					<img th:src="@{'/images/' + ${message.renamePicture}}" alt="写真">
+				</div>
+				<br>
+				メッセージ内容<br>
+				<a><span th:text="${message.explanation}">内容</span></a><br>
+			</div>
+			<div class="border"></div>
+		</div>
+		
+		<div class="btn-two">
+		<!-- 戻るボタン -->
+		<form th:action="@{'/admin/admin-user-detail' + ${user.userId}}" method="GET">
+			<input type="submit" value="戻る" class="white_btn">
+		</form>
+		<!--	ユーザー削除-->
+		<form th:action="@{'/admin/admin-user-delete-confirm' + ${user.userId}}" method="GET">	
+			<input type="submit" value="ユーザー削除" class="blue_btn">
+		</form>
+		</div>
+		</main>
+	</div>
+</body>
+</html>

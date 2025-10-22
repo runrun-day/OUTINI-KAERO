@@ -18,6 +18,7 @@
 	<main>
 <!--		エラーメッセージ-->
 		<p th:if="${errorMsg}" th:text="${errorMsg}" class="error-msg"></p>
+		位置情報の設定をONにして使用してください。<br>
 		
 		<form th:action="@{/user/login}" method="POST" th:object="${userLoginFrom}" class="form">
 			
@@ -32,8 +33,10 @@
 			<br>
 			
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-			
+<!--			scriptで取得-->
+			<!--			緯度-->
 			<input type="hidden" name="lat" id="lat">
+<!--			経度-->
 		    <input type="hidden" name="lon" id="lon">
 			
 			<input type="submit" value="ログイン" class="blue_btn">
@@ -59,6 +62,9 @@
 		</main>
 	</div>
 	
+	<!--	Geolocation API:ユーザーの現在位置、緯度・経度を取得-->
+	<!--	pos.coords.latitude→緯度-->
+	<!--	pos.coords.longitude→経度-->
 	<script>
 	navigator.geolocation.getCurrentPosition(function(pos) {
 	    document.getElementById("lat").value = pos.coords.latitude;

@@ -42,11 +42,15 @@
 				<!--ID検索-->
 				<tr th:if="${user}">
 					<td th:text="${user.userName}">ユーザー名</td>
+					<td>
+						<a th:href="@{/admin/user-detail(userId=${user.userId})}" class="blue_btn">詳細</a>
+					</td>
 				</tr>
 				</tbody>
 			</table>
+			<br>
 			<form th:action="@{/admin/admin-home}" method="GET">
-				<input type="submit" value="戻る" class="white_btn_2">
+				<input type="submit" value="戻る" class="white_btn">
 			</form>	
 		</main>
 	</div>

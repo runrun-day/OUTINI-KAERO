@@ -1,7 +1,6 @@
 package com.example.demo.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +19,8 @@ public interface LostCatRepository extends JpaRepository<LostCat, Integer> {
 //	<= 10000 半径10km以内
 //	lc.location→lost_catテーブルのlocation座標
 //	AND lc.cat_delete_flag = false→削除フラグfalseの猫だけ
+//	AND lc.user_id <> :userId→ログインユーザーの登録情報は除外
+//	AND lc.cat_date >= DATE_SUB(NOW(), INTERVAL 3 MONTH)→現在日時から過去３か月以内
 //	ORDER BY lc.cat_date DESC → 新しい日付順に並べる
 	
 	@Query(value = """
@@ -28,10 +29,14 @@ public interface LostCatRepository extends JpaRepository<LostCat, Integer> {
 		        lc.location,
 		        ST_GeomFromText(CONCAT('POINT(', :lon, ' ', :lat, ')'), 4326)
 		    ) <= 10000
-		    AND lc.cat_delete_flag = false
+		      AND lc.cat_delete_flag = false
+		      AND lc.user_id <> :userId
+		      AND lc.cat_date >= DATE_SUB(NOW(), INTERVAL 3 MONTH)
 		    ORDER BY lc.cat_date DESC
 		    """, nativeQuery = true)
-	List<LostCat> findNearbyCats(@Param("lon") double lon, @Param("lat") double lat);
-	
-	Optional<LostCat> findById(Integer catId);
+		List<LostCat> findNearbyCatsExcludeUser(
+		    @Param("lon") double lon,
+		    @Param("lat") double lat,
+		    @Param("userId") Integer userId
+		);
 }

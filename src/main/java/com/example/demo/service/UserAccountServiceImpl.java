@@ -18,7 +18,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 	@Override
 	public List<UserAccount> getActiveUsersByLoginDateDesc() {
 		
-		return repository.findByUserDeleteFlagFalseOrderByLoginDateDesc();
+		return repository.findByUserDeleteFlagFalseAndUserIdNotOrderByLoginDateDesc(1);
 	}
 
 	@Override

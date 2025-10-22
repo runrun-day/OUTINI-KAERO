@@ -12,4 +12,6 @@ public interface MessageService {
 	Message deleteMessage(Integer messageId);
 
 	List<Message> getReceivedMessages(UserAccount user);
+	
+	List<Message> getMessagesByUserId(Integer userId);
 }

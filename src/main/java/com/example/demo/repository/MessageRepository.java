@@ -17,4 +17,7 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 	
 	Optional<Message> findByMessageId(Integer messageId);
 	
+	@Query("SELECT m FROM Message m WHERE m.fromUser.userId = :userId ORDER BY m.messageDate DESC")
+	List<Message> findMessagesByUserId(@Param("userId") Integer userId);
+	
 }

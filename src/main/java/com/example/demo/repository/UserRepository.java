@@ -29,8 +29,8 @@ public interface UserRepository extends JpaRepository<UserAccount, Long>{
 //   該当データが存在→true
     boolean existsByMail(String mail);
     
- // userDeleteFlag = falseのユーザーをloginDate降順(新しい順)で取得
-    List<UserAccount> findByUserDeleteFlagFalseOrderByLoginDateDesc();
+ // userDeleteFlag = falseのユーザーかつ userId = 1（管理者）除くをloginDate降順(新しい順)で取得
+    List<UserAccount> findByUserDeleteFlagFalseAndUserIdNotOrderByLoginDateDesc(Integer userId);
     
     Optional<UserAccount> findByUserId(Integer userId);
 

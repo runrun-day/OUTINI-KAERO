@@ -16,8 +16,8 @@
 	<!--ヘッダーアイコンなし-->
 	<div th:replace="~{fragments/adminHeader :: adminHeader}"></div>
 	<main>
-<!--		エラーメッセージ-->
 		<h3>管理者ログイン</h3>
+		<!--	エラーメッセージ-->
 		<p th:if="${errorMsg}" th:text="${errorMsg}" class="error-msg"></p>
 		<p th:if="${msg}" th:text="${msg}" class="info-msg"></p>
 		

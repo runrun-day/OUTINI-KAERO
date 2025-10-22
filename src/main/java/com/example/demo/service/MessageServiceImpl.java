@@ -43,4 +43,9 @@ public class MessageServiceImpl implements MessageService {
 		return messageRepository.findReceivedByUser(user);
 	}
 
+	@Override
+	public List<Message> getMessagesByUserId(Integer userId) {
+		return messageRepository.findMessagesByUserId(userId);
+	}
+
 }
