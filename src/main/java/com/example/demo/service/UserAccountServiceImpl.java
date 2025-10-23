@@ -27,4 +27,17 @@ public class UserAccountServiceImpl implements UserAccountService {
 		return repository.findByUserId(userId);
 	}
 
+	@Override
+	public UserAccount deleteUser(Integer userId) {
+		Optional<UserAccount> user = repository.findByUserId(userId);
+		UserAccount u;
+		if (user.isPresent()) {
+		    u = user.get();
+		    u.setUserDeleteFlag(true);
+		    return repository.save(u);
+		} else {
+		    throw new IllegalArgumentException("ユーザーが見つかりません: " + userId);
+		}
+	}
+
 }

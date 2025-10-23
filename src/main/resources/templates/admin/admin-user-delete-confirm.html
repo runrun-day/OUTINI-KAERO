@@ -15,8 +15,38 @@
 		<!--ヘッダーアイコンあり-->
 		<div th:replace="~{fragments/adminHomeHeader :: adminHomeHeader}"></div>
 		<main>
+			<h3>	削除確認</h3>
+			<p>以下ユーザーを削除します。</p>
+			<div class="detail">
+				ユーザーID：
+				<a th:text="${user.userId}">ユーザーID</a><br>
+				<br>
+				ユーザー名：
+				<a th:text="${user.userName}">ユーザー名</a><br>
+				<br>
+				メールアドレス：
+				<a th:text="${user.mail}">メールアドレス</a><br>
+				<br>
+			</div>
+			<!--	メッセージ確認-->
+			<form th:action="@{/admin/user-detail}" method="GET">
+				<input type="hidden" name="userId" th:value="${user.userId}">
+				<input type="submit" value="ユーザー詳細へ" class="white_btn_2">
+		  	</form>
+			
+			<!-- 戻るボタン -->
+			<form th:action="@{/admin/admin-message-confirm}" method="GET">
+				<input type="hidden" name="userId" th:value="${user.userId}">
+				<input type="submit" value="メッセージ確認へ" class="white_btn_2">
+		  	</form>
+			
+			<!--	ユーザー削除-->
+			<form th:action="@{/admin/admin-user-delete-submit}" method="POST">
+				<input type="hidden" name="userId" th:value="${user.userId}">	
+				<input type="submit" value="ユーザー削除" class="blue_btn">
+		  	</form>
 
-		</main>
+	</main>
 	</div>
 </body>
 </html>

@@ -45,11 +45,11 @@ public class UserServiceImpl implements UserService {
 		UserAccount user;
 		if (optUser.isPresent()) {
 		    user = optUser.get();
-		    
 		    return user;
+		    
 		} else {
 		    throw new IllegalArgumentException("ユーザーが見つかりません: " + mail);
+		}
 	}
 
-	}
 }

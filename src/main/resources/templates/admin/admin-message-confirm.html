@@ -16,31 +16,38 @@
 		<div th:replace="~{fragments/adminHomeHeader :: adminHomeHeader}"></div>
 		<main>
 		<h3>送信メッセージ一覧</h3>
-		<div th:if="${messages == null or #lists.isEmpty(messages)}"></div>
+		<div th:if="${messages == null or #lists.isEmpty(messages)}">
+			<p>メッセージがありません。</p>
+		</div>
 		<div th:each="msg : ${messages}">
 			<td th:text="${#temporals.format(msg.messageDate, 'yyyy-MM-dd HH:mm')}">日時</td>
+			<div class="border"></div>
 			<div class="detail">
 				タイトル<br>
-				<a th:text="${message.title}">タイトル</a><br>
+				<a th:text="${msg.title}">タイトル</a><br>
 				<br>
 				<!-- 画像がある場合 -->
-				<div th:if="${message.renamePicture != null and !#strings.isEmpty(message.renamePicture)}">
-					<img th:src="@{'/images/' + ${message.renamePicture}}" alt="写真">
+				<div th:if="${msg.renamePicture != null and !#strings.isEmpty(msg.renamePicture)}">
+					<img th:src="@{'/images/' + ${msg.renamePicture}}" alt="写真">
+					<br>
 				</div>
-				<br>
+				
 				メッセージ内容<br>
-				<a><span th:text="${message.explanation}">内容</span></a><br>
+				<a><span th:text="${msg.explanation}">内容</span></a><br>
 			</div>
 			<div class="border"></div>
 		</div>
-		
+		<br>
 		<div class="btn-two">
 		<!-- 戻るボタン -->
-		<form th:action="@{'/admin/admin-user-detail' + ${user.userId}}" method="GET">
+		
+		<form th:action="@{/admin/user-detail}" method="GET">
+			<input type="hidden" name="userId" th:value="${user.userId}">
 			<input type="submit" value="戻る" class="white_btn">
 		</form>
 		<!--	ユーザー削除-->
-		<form th:action="@{'/admin/admin-user-delete-confirm' + ${user.userId}}" method="GET">	
+		<form th:action="@{/admin/admin-user-delete-confirm}" method="GET">	
+			<input type="hidden" name="userId" th:value="${user.userId}">
 			<input type="submit" value="ユーザー削除" class="blue_btn">
 		</form>
 		</div>

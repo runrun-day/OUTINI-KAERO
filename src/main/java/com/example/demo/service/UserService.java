@@ -14,5 +14,7 @@ public interface UserService {
 	boolean userMailSearch(String mail);
 	
 	UserAccount findUserByMail(String mail);
+
+	
 	
 }

@@ -13,4 +13,6 @@ public interface UserAccountService {
 	List<UserAccount> getActiveUsersByLoginDateDesc() ;
 	
 	Optional<UserAccount> findByUserId(Integer userId);
+	
+	UserAccount deleteUser(Integer userId);
 }
