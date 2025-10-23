@@ -60,6 +60,7 @@ public class AdminUserController {
 	    Optional<UserAccount> userOpt = Uservice.findByUserId(userId);
 	    if (userOpt.isPresent()) {
 	        model.addAttribute("user", userOpt.get());
+	        model.addAttribute("userId", userId);
 	        return "admin/admin-user-detail";
 	    } else {
 	        model.addAttribute("errorMsg", "ユーザーが見つかりません");

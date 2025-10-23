@@ -43,7 +43,7 @@ public class UserCommonController {
 //	ユーザー登録へ
 	@GetMapping("/user/user-signup")
 	public String userSignUp(Model model) {
-	    model.addAttribute("UserSearchForm", new UserSignUpFrom());
+	    model.addAttribute("userSignUpForm", new UserSignUpFrom());
 	    return "user/user-signup"; 
 	}
 	
