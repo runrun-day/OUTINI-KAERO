@@ -31,7 +31,7 @@ Spring Boot をベースに、MySQL の空間データ型や Thymeleaf を活用
 - 位置情報の登録・更新（緯度経度）  
 - メッセージ送受信（削除対応）  
 
-### 🐱 迷子猫機能
+### 🐱 (ユーザー側)迷子猫機能
 - 猫情報の登録・編集・削除  
 - 10km 以内の猫を検索（自分の投稿は除外）  
 
@@ -49,3 +49,29 @@ Spring Boot をベースに、MySQL の空間データ型や Thymeleaf を活用
 ### 1. リポジトリをクローン
 ```bash
 git clone https://github.com/runrun-day/OUTINI-KAERO.git
+
+### 2. DB を準備して接続情報を設定
+application.yml または application.properties
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/outini_kaero?serverTimezone=Asia/Tokyo
+    username: root
+    password: yourpassword
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+### 3. ビルド & 起動
+```bash
+./mvnw clean install
+./mvnw spring-boot:run
+
+### 3. アクセス
+```arduino
+[http://localhost:8080](http://localhost:8080/user/user-login)
+
+## 🔮 今後の改善予定  
+- 画像アップロード機能（迷子猫情報に写真添付）  
+- 管理者画面の UI/UX 改善  
+
