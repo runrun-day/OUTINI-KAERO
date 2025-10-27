@@ -51,30 +51,53 @@ Spring Boot をベースに、MySQL の空間データ型や Thymeleaf を活用
 git clone https://github.com/runrun-day/OUTINI-KAERO.git
 
 
-### 2. DB を準備して接続情報を設定
+2. DB を準備して接続情報を設定
+
 application.yml または application.properties
-```yaml
+
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/outini_kaero?serverTimezone=Asia/Tokyo
     username: root
-    password: root
+    password: yourpassword
   jpa:
     hibernate:
       ddl-auto: update
 
-
-### 3. ビルド & 起動
-```bash
+3. ビルド & 起動
 ./mvnw clean install
 ./mvnw spring-boot:run
 
+4. アクセス
+http://localhost:8080
 
-### 3. アクセス
-```arduino
-[http://localhost:8080](http://localhost:8080/user/user-login)
+🔮 今後の改善予定
 
-## 🔮 今後の改善予定  
-- 画像アップロード機能（迷子猫情報に写真添付）  
-- 管理者画面の UI/UX 改善  
+メッセージ通知のリアルタイム化（WebSocket 等）
 
+画像アップロード機能（迷子猫情報に写真添付）
+
+管理者画面の UI/UX 改善
+
+テストコード整備 (JUnit / Mockito)
+
+🤝 貢献方法
+
+このリポジトリをフォーク
+
+作業用ブランチを作成 (feature/xxx)
+
+変更をコミット & プッシュ
+
+プルリクエストを送信
+
+📜 ライセンス
+
+（適切なライセンスを追記してください）
+
+
+---
+
+📌 この形式なら GitHub 上で「見出し」「リスト」「絵文字アイコン」「コードブロック」がきれいに表示され、視覚的にも読みやすくなります。  
+
+👉 ご希望なら英語版も追加して「README.ja.md」「README.en.md」で切り分けられるようにします
