@@ -44,8 +44,3 @@ Spring Boot をベースに、MySQL の空間データ型や Thymeleaf を活用
 - Spring Security でのアクセス制御  
 
 ---
-
-## 🚀 セットアップ
-### 1. リポジトリをクローン
-```bash
-git clone https://github.com/runrun-day/OUTINI-KAERO.git
