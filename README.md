@@ -50,6 +50,7 @@ Spring Boot をベースに、MySQL の空間データ型や Thymeleaf を活用
 ```bash
 git clone https://github.com/runrun-day/OUTINI-KAERO.git
 
+
 ### 2. DB を準備して接続情報を設定
 application.yml または application.properties
 ```yaml
@@ -57,15 +58,17 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/outini_kaero?serverTimezone=Asia/Tokyo
     username: root
-    password: yourpassword
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
+
 
 ### 3. ビルド & 起動
 ```bash
 ./mvnw clean install
 ./mvnw spring-boot:run
+
 
 ### 3. アクセス
 ```arduino
